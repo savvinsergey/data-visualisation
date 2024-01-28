@@ -1,0 +1,5 @@
+<app-settings-form [formControl]="settingsControl"></app-settings-form>
+
+<hr/>
+
+<app-table [data]="data$ | async | sortDataByIDs: additionalIds" ></app-table>

@@ -1,0 +1,26 @@
+<form class="p-4"
+      [formGroup]="form">
+  <div class="row">
+    <div class="col-2">
+      <label>Timer</label>
+      <input type="number"
+             class="form-control"
+             formControlName="timer"
+             placeholder="Timer">
+    </div>
+    <div class="col-2">
+      <label>Array Size</label>
+      <input type="number"
+             class="form-control"
+             formControlName="arraySize"
+             placeholder="Array Size">
+    </div>
+    <div class="col-8">
+      <label>Additional Array IDs</label>
+      <input type="text"
+             class="form-control"
+             formControlName="additionalArrayIds"
+             placeholder="Additional Array IDs. Please use ',' as separator">
+    </div>
+  </div>
+</form>
