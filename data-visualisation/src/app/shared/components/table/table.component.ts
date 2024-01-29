@@ -4,6 +4,7 @@ import {CommonModule} from "@angular/common";
 import {IsColorValuePipe} from "../../pipes/isColorValue.pipe";
 import {IsModelInstancePipe} from "../../pipes/isModelInstance.pipe";
 import {DataModel} from "../../models/data.model";
+import {TableRowComponent} from "../table-row/table-row.component";
 
 @Component({
   selector: 'app-table',
@@ -12,16 +13,13 @@ import {DataModel} from "../../models/data.model";
   standalone: true,
   imports: [
     CommonModule,
-    IsColorValuePipe,
-    IsModelInstancePipe
+    TableRowComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent {
   @Input({ required: true }) data: DataModel[] | null = [];
   @Input() withBorder? = true;
-
-  public readonly DataModel = DataModel;
 
   get names() {
     return Object.keys(this.data?.[0] || []) as (keyof IData)[];

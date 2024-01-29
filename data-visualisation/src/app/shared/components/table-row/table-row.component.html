@@ -1,0 +1,25 @@
+<div class="row p-12 mb-4 d-flex align-items-center"
+     [ngClass]="withBorder && 'border' || null">
+  <div *ngFor="let name of names"
+       [ngClass]="name === 'id' ? 'col-2' : 'col'">
+    <ng-container *ngTemplateOutlet="(row[name] | isModelInstance: DataModel)
+            ? subTable
+            : simpleInfo;
+          context: { $implicit: row[name] }">
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #simpleInfo let-info>
+  <div [ngClass]="{ 'p-2': info | isColorValue }"
+       [ngStyle]="{ 'background-color': info | isColorValue }">
+    {{ info }}
+  </div>
+</ng-template>
+
+<ng-template #subTable let-data>
+  <div class="border m-2 p-2">
+    <app-table [withBorder]="false"
+               [data]="[data]" ></app-table>
+  </div>
+</ng-template>
