@@ -17,24 +17,24 @@ addEventListener('message', ({ data: settings }) => {
 
 function generateData(arraySize: number): IData[] {
   let dataArr: IData[] = [];
-  const defaultItem = { id: 0, color: "#fff" };
   for (let i = 0; i <= arraySize - 1; i++) {
-    const childIndex = generateInt(0, dataArr.length - 1);
-    const { id, color} = dataArr[childIndex] || defaultItem;
     dataArr = [...dataArr, {
       id: dataArr[dataArr.length - 1]?.id + 1 || 1,
       int: generateInt(1, 100),
       float: generateFloat(1, 100, 18),
       color: generateColor(),
-      child: { id, color }
+      child: getChild(dataArr)
     }]
   }
+
+  dataArr[0].child = getChild(dataArr);
+
   return dataArr;
 }
 
 function generateInt(min: number,
                      max: number) {
-  return  Math.floor(Math.random() * Math.floor(max));
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function generateFloat(min: number,
@@ -48,5 +48,13 @@ function generateFloat(min: number,
 function generateColor() {
   const colorGeneratorsArray = [hex, rgb, name];
   return colorGeneratorsArray[generateInt(0,2)]();
+}
+
+function getChild(dataArr: IData[]) {
+  const childIndex = generateInt(0, dataArr.length - 1);
+  const defaultItem = { id: 0, color: generateColor() };
+  const { id, color} = dataArr[childIndex] || defaultItem;
+
+  return { id, color };
 }
 

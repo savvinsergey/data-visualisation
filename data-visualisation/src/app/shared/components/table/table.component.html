@@ -1,15 +1,16 @@
 <div class="container">
   <div class="row">
-    <div class="col"
-      *ngFor="let name of names">
+    <div
+      *ngFor="let name of names"
+      [ngClass]="name === 'id' ? 'col-2' : 'col'">
       <h6>{{ name }}</h6>
     </div>
   </div>
   <div class="row p-12 mb-4 d-flex align-items-center"
        *ngFor="let row of data; trackBy: trackById"
        [ngClass]="withBorder && 'border' || null">
-    <div class="col"
-         *ngFor="let name of names">
+    <div *ngFor="let name of names"
+         [ngClass]="name === 'id' ? 'col-2' : 'col'">
       <ng-container *ngTemplateOutlet="(row[name] | isModelInstance: DataModel)
           ? subTable
           : simpleInfo;
@@ -20,7 +21,7 @@
 </div>
 
 <ng-template #simpleInfo let-info>
-  <div class="p-2"
+  <div [ngClass]="{ 'p-2': info | isColorValue }"
        [ngStyle]="{ 'background-color': info | isColorValue }">
     {{ info }}
   </div>
